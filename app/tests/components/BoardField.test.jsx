@@ -6,11 +6,11 @@ import expect from 'expect';
 import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
-import {BGRoom} from 'BGRoom';
+import {BoardField} from 'BoardField';
 
-describe('BGRoom', () => {
+describe('BoardField', () => {
   it('should exist', () => {
-    expect(BGRoom).toExist();
+    expect(BoardField).toExist();
   });
 
 });

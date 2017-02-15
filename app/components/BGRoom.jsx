@@ -1,12 +1,17 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
+import BoardList from 'BoardList';
+import ControlPanel from 'ControlPanel';
+
 export class BGRoom extends React.Component {
   render () {
     return (
-      <div>
-        <h1>BGRoom component</h1>
-      </div>
+        <div className="bgroom">
+          <ControlPanel/>
+            <h1 className="page-title">BoardGame Room</h1>
+            <BoardList/>
+        </div>
     );
   };
 };

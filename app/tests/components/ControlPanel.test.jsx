@@ -6,11 +6,11 @@ import expect from 'expect';
 import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
-import {BGRoom} from 'BGRoom';
+import {ControlPanel} from 'ControlPanel';
 
-describe('BGRoom', () => {
+describe('ControlPanel', () => {
   it('should exist', () => {
-    expect(BGRoom).toExist();
+    expect(ControlPanel).toExist();
   });
 
 });

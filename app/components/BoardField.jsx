@@ -1,14 +1,14 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
-export class Board extends React.Component {
+export class BoardField extends React.Component {
   render () {
     return (
       <div>
-        <h3>Board component</h3>
+        <h4>BoardField component</h4>
       </div>
     );
   };
 };
 
-export default Redux.connect()(Board);
+export default Redux.connect()(BoardField);

@@ -6,11 +6,11 @@ import expect from 'expect';
 import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
-import {BGRoom} from 'BGRoom';
+import {BoardList} from 'BoardList';
 
-describe('BGRoom', () => {
+describe('BoardList', () => {
   it('should exist', () => {
-    expect(BGRoom).toExist();
+    expect(BoardList).toExist();
   });
 
 });

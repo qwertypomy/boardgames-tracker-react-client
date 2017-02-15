@@ -6,7 +6,7 @@ import BGRoom from 'BGRoom';
 export default (
   <Router history={hashHistory}>
     <Route path="/">
-      <Route path="bgroom" component={BGRoom}/>
+      <IndexRoute component={BGRoom}/>
     </Route>
   </Router>
 );

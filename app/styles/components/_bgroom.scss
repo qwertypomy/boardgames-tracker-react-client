@@ -1,0 +1,30 @@
+.bgroom {
+  #sidebar {
+    background-color: $control-panel-color;
+    width: $sidebar-size;
+    text-align: center;
+    border-right: 1px solid #ececec;
+    .sidebar-item {
+      border-radius:0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    .sidebar-item:hover {
+      background-color: LightGrey;
+    }
+  }
+
+  .board-list, .page-title {
+    margin-left: $sidebar-size;
+  }
+
+  .page-title {
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 2.5em;
+    font-family: 'Signika', sans-serif;
+    color: darkslategray;
+  }
+}
