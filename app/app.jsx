@@ -1,6 +1,9 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+
+var store = require('configureStore').configure();
+import router from 'app/router/';
 
 // Load foundation
 $(document).foundation();
@@ -9,6 +12,8 @@ $(document).foundation();
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-  <p>Boilerplate 3 Project</p>,
+  <Provider store={store}>
+    {router}
+  </Provider>,
   document.getElementById('app')
 );
