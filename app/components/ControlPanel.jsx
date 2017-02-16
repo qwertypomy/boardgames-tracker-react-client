@@ -5,7 +5,6 @@ import * as actions from 'actions';
 export class ControlPanel extends React.Component {
   render () {
     var {name, uid, dispatch} = this.props;
-    console.log(name, uid);
     return (
         <div className="off-canvas position-left reveal-for-large" id="sidebar">
           <div id="home" className="sidebar-item">

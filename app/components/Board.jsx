@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
+import BoardField from 'BoardField';
+
 export class Board extends React.Component {
   constructor (props) {
     super(props);
@@ -13,13 +15,12 @@ export class Board extends React.Component {
 
     return fields.map((field) => {
       return(
-        <BoardField isCreator={isCreator} isPrivate={isPrivate} isEditing={isEditing} {...field}/>
+        <BoardField key={field.id} isCreator={isCreator} isPrivate={isPrivate} isEditing={isEditing} {...field}/>
       );
     });
   }
   renderButtons () {
     var {auth, uid, isEditing, isNewField} = this.props;
-    console.log(this.props.auth, auth);
     if (auth.uid === uid) {
       return <div className="board-buttons">
         <button className="button" className="button" className="button">Lock</button>

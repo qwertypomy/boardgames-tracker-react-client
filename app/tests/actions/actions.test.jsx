@@ -7,30 +7,34 @@ var actions = require('actions');
 var createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
+
   it('should generate ADD_BOARD action', () => {
     const action = {
       type: 'ADD_BOARD',
-      board: {
-        boardName: 'Player 1',
-        fields: [
-          {
-            fieldName: 'lvl',
-            fieldValue: 8,
-            isLocked: false
-          },
-          {
-            fieldName: 'class',
-            fieldValue: 'Orc',
-            isLocked: true
-          }
-        ],
-        isEditing: false,
-        isPrivate: false,
-        isNewField: false
-      }
+      uid: 'someuserid2345e5643',
+      uname: 'Jack'
     };
-    let res = actions.addBoard(action.board);
+    const res = actions.addBoard(action.uid, action.uname);
     expect(res).toEqual(action);
-
   });
+
+  it('should generate UPDATE_BOARD action', () => {
+    const action = {
+      type: 'UPDATE_BOARD',
+      boardId: 'abc123',
+      boardName: 'New board name',
+      fields: [
+        {
+          id: 'df89567uy89e',
+          fieldName: 'class',
+          fieldValue: 'Orc',
+          isLocked: true
+        },
+      ]
+    };
+
+    const res = actions.updateBoard(action.boardId, action.boardName, action.fields);
+    expect(res).toEqual(action);
+  });
+
 });

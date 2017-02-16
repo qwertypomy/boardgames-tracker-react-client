@@ -2,20 +2,34 @@ import React from 'react';
 import * as Redux from 'react-redux';
 
 export class BoardField extends React.Component {
+  constructor (props) {
+    super(props);
+    this.renderFieldName = this.renderFieldName.bind(this);
+    this.renderFieldValue = this.renderFieldValue.bind(this);
+  }
+  renderFieldName () {
+    var {isCreator, isEditing, fieldName} = this.props;
+    if (isCreator && isEditing) {
+      return <input type="text" ref="fieldName" defaultValue={fieldName}/>;
+    } else {
+      return <p>{fieldName}</p>
+    }
+  }
+  renderFieldValue () {
+    var {isCreator, isPrivate, isEditing, fieldValue, isLocked} = this.props;
+    if(((isCreator || !isPrivate) && !isLocked) || (isCreator && isEditing)) {
+      return <input type="text" ref="fieldValue" defaultValue={fieldValue}/>;
+    } else {
+      return <p>{fieldValue}</p>
+    }
+  }
   render () {
-    var {isCreator, isPrivate, isEditing, id, fieldName, fieldValue, isLocked} = this.props;
+    var {id, isLocked} = this.props;
     return (
       <div id={id} className="board-field">
-        {
-            <p>{fieldName}: {fieldValue}</p>
+        {this.renderFieldName()}: {this.renderFieldValue()}
 
-            // <div>
-            //   <input type="text" ref="fieldName" placeholder={fieldName}/>
-            //   <input type="text" ref="fieldValue" placeholder={fieldValue}/>
-            // </div>
-
-        }
-        <button className="button" className="button" className="button">Lock</button>
+        <button className="button">{isLocked?'Unlock':'Lock'}</button>
       </div>
     );
   }
