@@ -11,7 +11,7 @@ export class BoardList extends React.Component {
       if(boards) {
         return boards.map((board) => {
           return (
-            <Board key={board.id} {...board}/>
+            <Board key={board.boardId} {...board}/>
           );
         });
       } else {

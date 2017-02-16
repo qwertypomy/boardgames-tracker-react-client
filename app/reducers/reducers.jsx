@@ -8,7 +8,7 @@ export var boardsReducer = (state = [], action) => {
       return [
         ...state,
         {
-          BoardId: Math.random(),
+          boardId: Math.random(),
           uid: action.uid,
           boardName,
           fields: [], // ТАК ДОЛЖНО БЫТЬ!!!
@@ -43,7 +43,7 @@ export var boardsReducer = (state = [], action) => {
 
     case 'ADD_FIELD':
       return state.map((board) => {
-        return board.id===action.boardId
+        return board.boardId===action.boardId
           ? board.fields.push(
             {
               id: Math.random(),
