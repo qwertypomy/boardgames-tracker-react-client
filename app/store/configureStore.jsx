@@ -1,11 +1,12 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {boardsReducer} from 'reducers'
+import {roomReducer, authReducer} from 'reducers';
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
-    boards: boardsReducer
+    auth: authReducer,
+    room: roomReducer
   });
 
   var store = redux.createStore(reducer, initialState, redux.compose(

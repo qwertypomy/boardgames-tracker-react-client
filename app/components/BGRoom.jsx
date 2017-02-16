@@ -4,8 +4,19 @@ import * as Redux from 'react-redux';
 import BoardList from 'BoardList';
 import ControlPanel from 'ControlPanel';
 
+///////////////////
+// It should not be.
+import {login} from 'actions';
+///////////////////
+///////////////////
 export class BGRoom extends React.Component {
   render () {
+    ////////////////////
+    // It should not be.
+    var {dispatch} = this.props;
+    dispatch(login('123ascsf', 'Qwerty'));
+    ////////////////////
+
     return (
         <div className="bgroom">
           <ControlPanel/>

@@ -12,7 +12,7 @@ describe('Actions', () => {
       type: 'ADD_BOARD',
       board: {
         boardName: 'Player 1',
-        boardFields: [
+        fields: [
           {
             fieldName: 'lvl',
             fieldValue: 8,

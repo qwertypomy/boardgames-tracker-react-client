@@ -5,15 +5,26 @@ import Board from 'Board';
 
 export class BoardList extends React.Component {
   render () {
+    var {boards} = this.props;
+
+    var renderBoards = () => {
+      if(boards) {
+        return boards.map((board) => {
+          return (
+            <Board {...board}/>
+          );
+        });
+      } else {
+        return <h3>No Bords :(</h3>
+      }
+    };
+
     return (
         <div className="board-list">
-          <h2>BoardList component</h2>
-          <Board/>
+          {renderBoards()}
         </div>
     );
-  };
+  }
 };
 
-export default Redux.connect(
-  
-)(BoardList);
+export default Redux.connect((state) => state.room)(BoardList);
