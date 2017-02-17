@@ -25,17 +25,28 @@ export var boardsReducer = (state = [], action) => {
             ...board,
             boardName: action.boardName,
             fields: action.fields
-          }
+          };
         } else {
           return board;
         }
       });
 
-    case 'UPDATE_FIELD_VALUE':
-
     case 'DELETE_BOARD':
+      return state.filter((board) => {
+        return board.boardId!==action.boardId;
+      });
 
-    case 'TOGGLE_LOCK_BOARD':
+    case 'TOGGLE_PRIVATE_BOARD':
+    return state.map((board) => {
+      if( board.boardId===action.boardId) {
+        return {
+          ...board,
+          isPrivate: !board.isPrivate
+        };
+      } else {
+        return board;
+      }
+    });
 
     case 'TOGGLE_EDIT':
 

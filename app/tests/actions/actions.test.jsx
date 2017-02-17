@@ -37,4 +37,22 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
+  it('should generate DELETE_BOARD action', () => {
+    const action = {
+      type: 'DELETE_BOARD',
+      boardId: '1234kdfafs'
+    };
+    const res = actions.deleteBoard(action.boardId);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate TOGGLE_PRIVATE_BOARD action', () => {
+    const action = {
+      type: 'TOGGLE_PRIVATE_BOARD',
+      boardId: '1234kdfafs'
+    };
+    const res = actions.togglePrivateBoard(action.boardId);
+    expect(res).toEqual(action);
+  });
+
 });

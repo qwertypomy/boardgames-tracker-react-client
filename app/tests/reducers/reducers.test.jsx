@@ -53,7 +53,7 @@ describe('Reducers', () => {
           isNewField: false
         },
         {
-          id: 'djfhiu8247yn',
+          boardId: 'djfhiu8247yn',
           userId: 'someuserid3458832sj',
           boardName: 'Super board',
           fields: [],
@@ -67,5 +67,69 @@ describe('Reducers', () => {
       expect(res[0]).toInclude(board);
     });
 
+    it('should delete board', () => {
+      const action = {
+        type: 'DELETE_BOARD',
+        boardId: 'sdfjuiau453i'
+      };
+
+      const boards = [
+        {
+          boardId: 'sdfjuiau453i',
+          uid: 'someuserid2345e5643',
+          boardName: "Jack's board",
+          fields: [],
+          isEditing: false,
+          isPrivate: false,
+          isNewField: false
+        },
+        {
+          boardId: 'djfhiu8247yn',
+          userId: 'someuserid3458832sj',
+          boardName: 'Super board',
+          fields: [],
+          isEditing: false,
+          isPrivate: true,
+          isNewField: false
+        }
+      ];
+
+      const res = reducers.boardsReducer(df(boards), df(action));
+      expect(res.length).toEqual(boards.length - 1);
+      expect(res[0]).toEqual(boards[1]);
+
+    });
+
+    it('should toggle isPrivate board', () => {
+      const action = {
+        type: 'TOGGLE_PRIVATE_BOARD',
+        boardId: 'djfhiu8247yn'
+      };
+
+      const boards = [
+        {
+          boardId: 'sdfjuiau453i',
+          uid: 'someuserid2345e5643',
+          boardName: "Jack's board",
+          fields: [],
+          isEditing: false,
+          isPrivate: false,
+          isNewField: false
+        },
+        {
+          boardId: 'djfhiu8247yn',
+          userId: 'someuserid3458832sj',
+          boardName: 'Super board',
+          fields: [],
+          isEditing: false,
+          isPrivate: true,
+          isNewField: false
+        }
+      ];
+
+      const res = reducers.boardsReducer(df(boards), df(action));
+      expect(res[1].isPrivate).toEqual(!boards[1].isPrivate);
+
+    });
   });
 });

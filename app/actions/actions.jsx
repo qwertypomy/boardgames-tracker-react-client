@@ -19,8 +19,20 @@ export var updateBoard = (boardId, boardName, fields) => {
 };
 
 // deleteBoard
+export var deleteBoard = (boardId) => {
+  return {
+    type: 'DELETE_BOARD',
+    boardId
+  };
+};
 
-// toggleLockBoard
+// togglePrivateBoard
+export var togglePrivateBoard = (boardId) => {
+  return {
+    type: 'TOGGLE_PRIVATE_BOARD',
+    boardId
+  };
+};
 
 // toggleEdit
 
