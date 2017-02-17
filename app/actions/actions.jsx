@@ -8,7 +8,6 @@ export var addBoard = (uid, uname) => {
   };
 };
 
-// updateBoard
 export var updateBoard = (boardId, boardName, fields) => {
   return {
     type: 'UPDATE_BOARD',
@@ -18,7 +17,6 @@ export var updateBoard = (boardId, boardName, fields) => {
   };
 };
 
-// deleteBoard
 export var deleteBoard = (boardId) => {
   return {
     type: 'DELETE_BOARD',
@@ -26,7 +24,6 @@ export var deleteBoard = (boardId) => {
   };
 };
 
-// togglePrivateBoard
 export var togglePrivateBoard = (boardId) => {
   return {
     type: 'TOGGLE_PRIVATE_BOARD',
@@ -34,24 +31,53 @@ export var togglePrivateBoard = (boardId) => {
   };
 };
 
-// toggleEdit
+export var toggleEditBoard = (boardId) => {
+  return {
+    type: 'TOGGLE_EDIT_BOARD',
+    boardId
+  };
+};
 
-// toggleAdd
+export var toggleAddField = (boardId) => {
+  return {
+    type: 'TOGGLE_ADD_FIELD',
+    boardId
+  };
+};
 
+export var addField = (boardId, fieldName, fieldValue) => {
+  return {
+    type: 'ADD_FIELD',
+    boardId,
+    fieldName,
+    fieldValue
+  };
+};
 
-// addField
+export var updateFieldValue = (boardId, fieldId, fieldValue) => {
+  return {
+    type: 'UPDATE_FIELD_VALUE',
+    boardId,
+    fieldId,
+    fieldValue
+  };
+};
 
-// updateFieldValue
+export var deleteField = (boardId, fieldId) => {
+  return {
+    type: 'DELETE_FIELD',
+    boardId,
+    fieldId
+  };
+};
 
-// deleteField
-
-// toggleLockField
-
-
-
-
-
-//###### Users actions ######//
+export var toggleLockField = (boardId, fieldId) => {
+  return {
+    type: 'TOGGLE_LOCK_FIELD',
+    boardId,
+    fieldId
+  };
+};
 
 export var addUser = (user) => {
   return {

@@ -48,29 +48,105 @@ export var boardsReducer = (state = [], action) => {
       }
     });
 
-    case 'TOGGLE_EDIT':
+    case 'TOGGLE_EDIT_BOARD':
+      return state.map((board) => {
+        if( board.boardId===action.boardId) {
+          return {
+            ...board,
+            isEditing: !board.isEditing
+          };
+        } else {
+          return board;
+        }
+      });
 
-    case 'TOGGLE_ADD':
+    case 'TOGGLE_ADD_FIELD':
+      return state.map((board) => {
+        if( board.boardId===action.boardId) {
+          return {
+            ...board,
+            isNewField: !board.isNewField
+          };
+        } else {
+          return board;
+        }
+      });
 
     case 'ADD_FIELD':
       return state.map((board) => {
-        return board.boardId===action.boardId
-          ? board.fields.push(
-            {
-              id: Math.random(),
-              fieldName: '',
-              fieldValue: '',
-              isLocked: false
-            }
-          )
-          : board;
+        if( board.boardId===action.boardId) {
+          return {
+            ...board,
+            fields: [
+              ...board.fields,
+              {
+                fieldId: Math.random(),
+                fieldName: action.fieldName,
+                fieldValue: action.fieldValue,
+                isLocked: false
+              }
+            ]
+          };
+        } else {
+          return board;
+        }
       });
 
     case 'UPDATE_FIELD_VALUE':
+      return state.map((board) => {
+        if( board.boardId===action.boardId) {
+          return {
+            ...board,
+            fields: board.fields.map((field) => {
+              if(field.fieldId===action.fieldId) {
+                return {
+                  ...field,
+                  fieldValue: action.fieldValue
+                };
+              } else {
+                return field;
+              }
+            })
+          };
+        } else {
+          return board;
+        }
+      });
 
-    case 'DELTE_FIELD':
+    case 'DELETE_FIELD':
+      return state.map((board) => {
+        if(board.boardId===action.boardId) {
+          return {
+            ...board,
+            fields: board.fields.filter((field) => {
+              return field.fieldId!==action.fieldId;
+              })
+          };
+        } else {
+          return board;
+        }
+      });
 
     case 'TOGGLE_LOCK_FIELD':
+      return state.map((board) => {
+        if( board.boardId===action.boardId) {
+          return {
+            ...board,
+            fields: board.fields.map((field) => {
+              if(field.fieldId===action.fieldId) {
+                return {
+                  ...field,
+                  isLocked: !field.isLocked
+                };
+              } else {
+                return field;
+              }
+            })
+          };
+        } else {
+          return board;
+        }
+      });
 
     default:
       return state;

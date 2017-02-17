@@ -25,7 +25,7 @@ describe('Actions', () => {
       boardName: 'New board name',
       fields: [
         {
-          id: 'df89567uy89e',
+          fieldId: 'df89567uy89e',
           fieldName: 'class',
           fieldValue: 'Orc',
           isLocked: true
@@ -33,7 +33,8 @@ describe('Actions', () => {
       ]
     };
 
-    const res = actions.updateBoard(action.boardId, action.boardName, action.fields);
+    const res = actions.updateBoard(action.boardId,
+      action.boardName, action.fields);
     expect(res).toEqual(action);
   });
 
@@ -52,6 +53,68 @@ describe('Actions', () => {
       boardId: '1234kdfafs'
     };
     const res = actions.togglePrivateBoard(action.boardId);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate TOGGLE_EDIT_BOARD action', () => {
+    const action = {
+      type: 'TOGGLE_EDIT_BOARD',
+      boardId: '1234kdfafs'
+    };
+    const res = actions.toggleEditBoard(action.boardId);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate TOGGLE_ADD_FIELD action', () => {
+    const action = {
+      type: 'TOGGLE_ADD_FIELD',
+      boardId: '1234kdfafs'
+    };
+    const res = actions.toggleAddField(action.boardId);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate ADD_FIELD action', () => {
+    const action = {
+      type: 'ADD_FIELD',
+      boardId: '1234kdfafs',
+      fieldName: 'lvl',
+      fieldValue: '25'
+    };
+    const res = actions.addField(action.boardId,
+      action.fieldName, action.fieldValue);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate UPDATE_FIELD_VALUE action', () => {
+    const action = {
+      type: 'UPDATE_FIELD_VALUE',
+      boardId: 'dgkjsfdkj32',
+      fieldId: 'sfkjzdjkzz',
+      fieldValue: '22'
+    };
+    const res = actions.updateFieldValue(action.boardId, action.fieldId,
+       action.fieldValue);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate DELETE_FIELD action', () => {
+    const action = {
+      type: 'DELETE_FIELD',
+      boardId: 'dgkjsfdkj32',
+      fieldId: 'sfkjzdjkzz'
+    };
+    const res = actions.deleteField(action.boardId, action.fieldId);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate TOGGLE_LOCK_FIELD action', () => {
+    const action = {
+      type: 'TOGGLE_LOCK_FIELD',
+      boardId: 'dgkjsfdkj32',
+      fieldId: 'sfkjzdjkzz'
+    };
+    const res = actions.toggleLockField(action.boardId, action.fieldId);
     expect(res).toEqual(action);
   });
 
