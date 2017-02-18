@@ -8,23 +8,21 @@ export var boardsReducer = (state = [], action) => {
       return [
         ...state,
         {
-          boardId: Math.random(),
+          boardId: Math.floor(Math.random()*100000),
           uid: action.uid,
           boardName,
           fields: [], // ТАК ДОЛЖНО БЫТЬ!!!
-          isEditing: true,
-          isPrivate: true,
-          isNewField: true
+          isEditing: false,
+          isPrivate: true
         }
       ];
 
-    case 'UPDATE_BOARD':
+    case 'UPDATE_BOARD_NAME':
       return state.map((board) => {
         if( board.boardId===action.boardId) {
           return {
             ...board,
-            boardName: action.boardName,
-            fields: action.fields
+            boardName: action.boardName
           };
         } else {
           return board;
@@ -60,18 +58,6 @@ export var boardsReducer = (state = [], action) => {
         }
       });
 
-    case 'TOGGLE_ADD_FIELD':
-      return state.map((board) => {
-        if( board.boardId===action.boardId) {
-          return {
-            ...board,
-            isNewField: !board.isNewField
-          };
-        } else {
-          return board;
-        }
-      });
-
     case 'ADD_FIELD':
       return state.map((board) => {
         if( board.boardId===action.boardId) {
@@ -80,9 +66,9 @@ export var boardsReducer = (state = [], action) => {
             fields: [
               ...board.fields,
               {
-                fieldId: Math.random(),
-                fieldName: action.fieldName,
-                fieldValue: action.fieldValue,
+                fieldId: Math.floor(Math.random()*100000),
+                fieldName: '',
+                fieldValue: '',
                 isLocked: false
               }
             ]
@@ -112,6 +98,27 @@ export var boardsReducer = (state = [], action) => {
           return board;
         }
       });
+
+      case 'UPDATE_FIELD_NAME':
+        return state.map((board) => {
+          if( board.boardId===action.boardId) {
+            return {
+              ...board,
+              fields: board.fields.map((field) => {
+                if(field.fieldId===action.fieldId) {
+                  return {
+                    ...field,
+                    fieldName: action.fieldName
+                  };
+                } else {
+                  return field;
+                }
+              })
+            };
+          } else {
+            return board;
+          }
+        });
 
     case 'DELETE_FIELD':
       return state.map((board) => {

@@ -16,31 +16,19 @@ describe('Reducers', () => {
         uid: action.uid,
         boardName: (action.uname + "'s board"),
         fields: [],
-        isEditing: true,
-        isPrivate: true,
-        isNewField: true
+        isEditing: false,
+        isPrivate: true
       };
       const res = reducers.boardsReducer(undefined, df(action));
       expect(res.length).toEqual(1);
       expect(res[0]).toInclude(board);
     });
 
-    it('should update existing board', () => {
-      const board = {
-        boardId: 'sdfjuiau453i',
-        boardName: 'New board name',
-        fields: [
-          {
-            fieldId: 'df89567uy89e',
-            fieldName: 'class',
-            fieldValue: 'Orc',
-            isLocked: true
-          },
-        ]
-      };
+    it('should update board name', () => {
       const action = {
-        type: 'UPDATE_BOARD',
-        ...board
+        type: 'UPDATE_BOARD_NAME',
+        boardId: 'sdfjuiau453i',
+        boardName: 'New board name'
       };
       const boards = [
         {
@@ -49,8 +37,7 @@ describe('Reducers', () => {
           boardName: "Jack's board",
           fields: [],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         },
         {
           boardId: 'djfhiu8247yn',
@@ -58,13 +45,12 @@ describe('Reducers', () => {
           boardName: 'Super board',
           fields: [],
           isEditing: false,
-          isPrivate: true,
-          isNewField: false
+          isPrivate: true
         }
       ];
 
       const res = reducers.boardsReducer(df(boards), df(action));
-      expect(res[0]).toInclude(board);
+      expect(res[0].boardName).toEqual(action.boardName);
     });
 
     it('should delete board', () => {
@@ -80,8 +66,7 @@ describe('Reducers', () => {
           boardName: "Jack's board",
           fields: [],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         },
         {
           boardId: 'djfhiu8247yn',
@@ -89,8 +74,7 @@ describe('Reducers', () => {
           boardName: 'Super board',
           fields: [],
           isEditing: false,
-          isPrivate: true,
-          isNewField: false
+          isPrivate: true
         }
       ];
 
@@ -113,8 +97,7 @@ describe('Reducers', () => {
           boardName: "Jack's board",
           fields: [],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         },
         {
           boardId: 'djfhiu8247yn',
@@ -122,8 +105,7 @@ describe('Reducers', () => {
           boardName: 'Super board',
           fields: [],
           isEditing: false,
-          isPrivate: true,
-          isNewField: false
+          isPrivate: true
         }
       ];
 
@@ -144,8 +126,7 @@ describe('Reducers', () => {
           boardName: "Jack's board",
           fields: [],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         },
         {
           boardId: 'djfhiu8247yn',
@@ -153,8 +134,7 @@ describe('Reducers', () => {
           boardName: 'Super board',
           fields: [],
           isEditing: false,
-          isPrivate: true,
-          isNewField: false
+          isPrivate: true
         }
       ];
 
@@ -162,9 +142,11 @@ describe('Reducers', () => {
       expect(res[1].isEditing).toEqual(!boards[1].isEditing);
     });
 
-    it('should toggle isNewField', () => {
+
+    it('should add field', () => {
+
       const action = {
-        type: 'TOGGLE_ADD_FIELD',
+        type: 'ADD_FIELD',
         boardId: 'djfhiu8247yn'
       };
 
@@ -175,8 +157,7 @@ describe('Reducers', () => {
           boardName: "Jack's board",
           fields: [],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         },
         {
           boardId: 'djfhiu8247yn',
@@ -184,55 +165,15 @@ describe('Reducers', () => {
           boardName: 'Super board',
           fields: [],
           isEditing: false,
-          isPrivate: true,
-          isNewField: false
-        }
-      ];
-
-      const res = reducers.boardsReducer(df(boards), df(action));
-      expect(res[1].isNewField).toEqual(!boards[1].isNewField);
-    });
-
-    it('should add field', () => {
-      const field = {
-        fieldName: 'lvl',
-        fieldValue: '25'
-      };
-
-      const action = {
-        type: 'ADD_FIELD',
-        boardId: 'djfhiu8247yn',
-        ...field
-      };
-
-      const boards = [
-        {
-          boardId: 'sdfjuiau453i',
-          uid: 'someuserid2345e5643',
-          boardName: "Jack's board",
-          fields: [],
-          isEditing: false,
-          isPrivate: false,
-          isNewField: false
-        },
-        {
-          boardId: 'djfhiu8247yn',
-          userId: 'someuserid3458832sj',
-          boardName: 'Super board',
-          fields: [],
-          isEditing: false,
-          isPrivate: true,
-          isNewField: false
+          isPrivate: true
         }
       ];
 
       const res = reducers.boardsReducer(df(boards), df(action));
       expect(res[1].fields.length).toEqual(1);
-      expect(res[1].fields[0]).toInclude(field);
     });
 
     it('should update field value', () => {
-
       const action = {
         type: 'UPDATE_FIELD_VALUE',
         boardId: 'sdfjuiau453i',
@@ -254,13 +195,42 @@ describe('Reducers', () => {
             }
           ],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         }
       ];
 
       const res = reducers.boardsReducer(df(boards), df(action));
       expect(res[0].fields[0].fieldValue).toEqual(action.fieldValue);
+    });
+
+    it('should update field name', () => {
+      const action = {
+        type: 'UPDATE_FIELD_NAME',
+        boardId: 'sdfjuiau453i',
+        fieldId: '7q9834ywdhad',
+        fieldName: 'New field name'
+      };
+
+      const boards = [
+        {
+          boardId: 'sdfjuiau453i',
+          uid: 'someuserid2345e5643',
+          boardName: "Jack's board",
+          fields: [
+            {
+              fieldId: '7q9834ywdhad',
+              fieldName: 'lvl',
+              fieldValue: 8,
+              isLocked: false
+            }
+          ],
+          isEditing: false,
+          isPrivate: false
+        }
+      ];
+
+      const res = reducers.boardsReducer(df(boards), df(action));
+      expect(res[0].fields[0].fieldName).toEqual(action.fieldName);
     });
 
     it('should delete field', () => {
@@ -285,8 +255,7 @@ describe('Reducers', () => {
             }
           ],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         }
       ];
 
@@ -317,8 +286,7 @@ describe('Reducers', () => {
             }
           ],
           isEditing: false,
-          isPrivate: false,
-          isNewField: false
+          isPrivate: false
         }
       ];
 

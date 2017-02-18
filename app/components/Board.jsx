@@ -2,48 +2,82 @@ import React from 'react';
 import * as Redux from 'react-redux';
 
 import BoardField from 'BoardField';
+import * as actions from 'actions';
 
 export class Board extends React.Component {
   constructor (props) {
     super(props);
-    this.renderFields = this.renderFields.bind(this);
-    this.renderButtons = this.renderButtons.bind(this);
+    this.handleAddField = this.handleAddField.bind(this);
   }
-  renderFields () {
-    var {auth, uid, fields, isPrivate, isEditing} = this.props;
-    const isCreator = auth.uid === uid;
 
-    return fields.map((field) => {
-      return(
-        <BoardField key={field.id} isCreator={isCreator} isPrivate={isPrivate} isEditing={isEditing} {...field}/>
-      );
-    });
-  }
-  renderButtons () {
-    var {auth, uid, isEditing, isNewField} = this.props;
-    if (auth.uid === uid) {
-      return <div className="board-buttons">
-        <button className="button" className="button" className="button">Lock</button>
-        <button className="button" className="button" className="button">Add</button>
-        {isEditing?<button className="button" className="button" className="button">Save</button> : <button className="button" className="button" className="button">Edit</button>}
-        <button className="button" className="button" className="button">Delete</button>
-      </div>;
+  handleAddField (e) {
+    e.preventDefault();
+    var {dispatch, boardId} = this.props;
+    const fieldNameText = this.refs.fieldNameText.value;
+    const fieldValueText = this.refs.fieldValueText.value;
+
+    if (fieldNameText.length > 0) {
+      this.refs.fieldNameText.value = '';
+      this.refs.fieldValueText.value = '';
+      dispatch(actions.addField(boardId, fieldNameText, fieldValueText));
+    } else {
+      this.refs.fieldNameText.focus();
     }
   }
 
   render () {
-    var {id, boardName} = this.props;
+    let {dispatch, auth, boardId, boardName, uid, isEditing,
+      isPrivate, fields} = this.props;
+
+    const isCreator = auth.uid === uid;
+
+    const boardNameInterface = isCreator && isEditing?
+      <input type="text" ref="boardNameText" defaultValue={boardName} onChange={
+          () => dispatch(actions.updateBoardName(boardId, this.refs.boardNameText.value))
+        }/>
+      : <h3>{boardName}</h3>
+
+    const controlButtons = isCreator? (
+      <div className="board-buttons">
+        <button className="button" onClick={() =>
+            dispatch(actions.togglePrivateBoard(boardId))
+          }>{isPrivate?'Public':'Private'}</button>
+
+          <button className="button" onClick={() =>
+              dispatch(actions.toggleEditBoard(boardId))
+            }>{isEditing?'Save':'Edit'}</button>
+
+        <button className="button" onClick={() =>
+            dispatch(actions.deleteBoard(boardId))
+          }>Delete</button>
+      </div>
+    ) : null;
+
+    const fieldsInterface = fields.map((field) => {
+      return(
+        <BoardField key={field.fieldId} isCreator={isCreator} isPrivate={isPrivate}
+          isEditing={isEditing} boardId={boardId} {...field}/>
+      );
+    });
+
+    const addNewFieldInterface = isEditing? (
+      <button className="button" onClick={() =>
+          dispatch(actions.addField(boardId))
+        }>Add new field</button>
+    ) : null;
+
     return (
-      <div className="board" id={id}>
-        <h3>{boardName}</h3>
-        {this.renderButtons()}
-        {this.renderFields()}
+      <div className="board" key={boardId}>
+        {boardNameInterface}
+        {controlButtons}
+        {fieldsInterface}
+        {addNewFieldInterface}
       </div>
     );
   }
 };
 
 export default Redux.connect((state) => {
-  var auth = state.auth;
+  let auth = state.auth;
   return {auth};
 })(Board);

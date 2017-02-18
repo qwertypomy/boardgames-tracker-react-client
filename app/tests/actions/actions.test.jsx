@@ -18,23 +18,15 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
-  it('should generate UPDATE_BOARD action', () => {
+  it('should generate UPDATE_BOARD_NAME action', () => {
     const action = {
-      type: 'UPDATE_BOARD',
+      type: 'UPDATE_BOARD_NAME',
       boardId: 'abc123',
-      boardName: 'New board name',
-      fields: [
-        {
-          fieldId: 'df89567uy89e',
-          fieldName: 'class',
-          fieldValue: 'Orc',
-          isLocked: true
-        },
-      ]
+      boardName: 'New board name'
     };
 
-    const res = actions.updateBoard(action.boardId,
-      action.boardName, action.fields);
+    const res = actions.updateBoardName(action.boardId,
+      action.boardName);
     expect(res).toEqual(action);
   });
 
@@ -65,21 +57,10 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
-  it('should generate TOGGLE_ADD_FIELD action', () => {
-    const action = {
-      type: 'TOGGLE_ADD_FIELD',
-      boardId: '1234kdfafs'
-    };
-    const res = actions.toggleAddField(action.boardId);
-    expect(res).toEqual(action);
-  });
-
   it('should generate ADD_FIELD action', () => {
     const action = {
       type: 'ADD_FIELD',
-      boardId: '1234kdfafs',
-      fieldName: 'lvl',
-      fieldValue: '25'
+      boardId: '1234kdfafs'
     };
     const res = actions.addField(action.boardId,
       action.fieldName, action.fieldValue);
@@ -95,6 +76,18 @@ describe('Actions', () => {
     };
     const res = actions.updateFieldValue(action.boardId, action.fieldId,
        action.fieldValue);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate UPDATE_FIELD_NAME action', () => {
+    const action = {
+      type: 'UPDATE_FIELD_NAME',
+      boardId: 'dgkjsfdkj32',
+      fieldId: 'sfkjzdjkzz',
+      fieldName: 'New field name'
+    };
+    const res = actions.updateFieldName(action.boardId, action.fieldId,
+       action.fieldName);
     expect(res).toEqual(action);
   });
 

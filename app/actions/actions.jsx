@@ -8,12 +8,11 @@ export var addBoard = (uid, uname) => {
   };
 };
 
-export var updateBoard = (boardId, boardName, fields) => {
+export var updateBoardName = (boardId, boardName) => {
   return {
-    type: 'UPDATE_BOARD',
+    type: 'UPDATE_BOARD_NAME',
     boardId,
-    boardName,
-    fields
+    boardName
   };
 };
 
@@ -38,19 +37,17 @@ export var toggleEditBoard = (boardId) => {
   };
 };
 
-export var toggleAddField = (boardId) => {
-  return {
-    type: 'TOGGLE_ADD_FIELD',
-    boardId
-  };
-};
+// export var toggleAddField = (boardId) => {
+//   return {
+//     type: 'TOGGLE_ADD_FIELD',
+//     boardId
+//   };
+// };
 
-export var addField = (boardId, fieldName, fieldValue) => {
+export var addField = (boardId) => {
   return {
     type: 'ADD_FIELD',
-    boardId,
-    fieldName,
-    fieldValue
+    boardId
   };
 };
 
@@ -60,6 +57,15 @@ export var updateFieldValue = (boardId, fieldId, fieldValue) => {
     boardId,
     fieldId,
     fieldValue
+  };
+};
+
+export var updateFieldName = (boardId, fieldId, fieldName) => {
+  return {
+    type: 'UPDATE_FIELD_NAME',
+    boardId,
+    fieldId,
+    fieldName
   };
 };
 

@@ -13,8 +13,8 @@ export class BGRoom extends React.Component {
   render () {
     ////////////////////
     // It should not be.
-    var {dispatch} = this.props;
-    dispatch(login('123ascsf', 'Qwerty'));
+    let {dispatch} = this.props;
+    dispatch(login('123ascsf', 'User'));
     ////////////////////
 
     return (
