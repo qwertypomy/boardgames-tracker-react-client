@@ -39,23 +39,52 @@
     text-align: center;
     font-size: 2.5em;
     font-family: 'Signika', sans-serif;
-    color: darkslategray;
+    color: #3A3335;
   }
 
-
+  .add-field {
+    float: right;
+  }
 
   .board-list {
-    .row {
-      max-width: 100rem;
+    .button {
+      background-color: #FF773D;
+      margin-right: 1rem;
+      color: #3A3335;
     }
-    .board {
-      border: 2px solid $border-color;
-      float: left;
-      .board-name {
-        text-align: center;
-      }
-      .board-field {
+    .row {
+      margin-left: 2rem;
+      max-width: 100%;
+      .board {
+        margin-right: 1.5rem;
+        margin-bottom: 1rem;
+        border: 0.1rem solid #F55536;
         float: left;
+        color: #3A3335;
+        background-color: #FABC3C;
+        .fa-plus {
+          color: #45050C;
+          float: right;
+          margin-bottom: 1rem;
+          margin-right: 1.5rem;
+        }
+        .board-header {
+          margin-top: 0.5rem;
+          .board-name {
+            text-align: center;
+          }
+        }
+
+        .board-field {
+          float: left;
+          p {
+            font-size: 1rem;
+            text-align: center;
+            padding-top: 0.35rem;
+            padding-bottom: 0.35rem;
+            background-color: white;
+          }
+        }
       }
     }
   }

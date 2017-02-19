@@ -32,12 +32,12 @@ export class Board extends React.Component {
     const isCreator = auth.uid === uid;
 
     const boardNameInterface = isCreator && isEditing?
-      <div className="small-10 small-centered columns">
+      <div className="board-header small-5 small-centered columns">
         <input type="text" ref="boardNameText" defaultValue={boardName} onChange={
             () => dispatch(actions.updateBoardName(boardId, this.refs.boardNameText.value))
           }/>
       </div>
-      : <div className="small-10 small-centered columns"><h3 className="board-name">{boardName}</h3></div>
+      : <div className="board-header small-5 small-centered columns"><h3 className="board-name">{boardName}</h3></div>
 
     const controlButtons = isCreator? (
       <div className="board-buttons">
@@ -63,19 +63,17 @@ export class Board extends React.Component {
     });
 
     const addNewFieldInterface = isEditing? (
-      <button className="button" onClick={() =>
+      <i className="fa fa-plus fa-2x" aria-hidden="true" onClick={() =>
           dispatch(actions.addField(boardId))
-        }>Add new field</button>
+        }></i>
     ) : null;
 
     return (
-      <div className="board large-4 medium-6 small-12 columns" key={boardId}>
-        <div calssName="row">
-          {boardNameInterface}
-          {controlButtons}
-          {fieldsInterface}
-          {addNewFieldInterface}
-        </div>
+      <div className="board large-5 medium-12 small-12 columns" key={boardId}>
+        {boardNameInterface}
+        {controlButtons}
+        {fieldsInterface}
+        {addNewFieldInterface}
       </div>
     );
   }
