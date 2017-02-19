@@ -20,9 +20,11 @@ export class BoardList extends React.Component {
     };
 
     return (
-        <div className="board-list">
+      <div className="board-list">
+        <div className="row">
           {renderBoards()}
         </div>
+      </div>
     );
   }
 };

@@ -6,7 +6,7 @@ export class ControlPanel extends React.Component {
   render () {
     var {name, uid, dispatch} = this.props;
     return (
-        <div className="off-canvas position-left reveal-for-large" id="sidebar">
+        <div className="off-canvas position-left reveal-for-small reveal-for-large reveal-for-medium" id="sidebar">
           <div id="home" className="sidebar-item">
             <i className="fa fa-home fa-3x" aria-hidden="true"></i>
           </div>

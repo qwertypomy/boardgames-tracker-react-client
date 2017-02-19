@@ -3,7 +3,7 @@
     background-color: $control-panel-color;
     width: $sidebar-size;
     text-align: center;
-    border-right: 1px solid #ececec;
+    border-right: 1px solid $border-color;
     .sidebar-item {
       border-radius:0.5rem;
       margin-top: 0.5rem;
@@ -14,19 +14,17 @@
       .fa-plus {
         color: green;
       }
-
       .fa-times {
         color: red;
       }
-
       .fa-users {
         color: #3597d8;
       }
-
       .fa-home {
         color: #fca604;
       }
     }
+
     .sidebar-item:hover {
       background-color: LightGrey;
     }
@@ -44,9 +42,21 @@
     color: darkslategray;
   }
 
+
+
   .board-list {
+    .row {
+      max-width: 100rem;
+    }
     .board {
-      border: 2px solid #ececec;
+      border: 2px solid $border-color;
+      float: left;
+      .board-name {
+        text-align: center;
+      }
+      .board-field {
+        float: left;
+      }
     }
   }
 }

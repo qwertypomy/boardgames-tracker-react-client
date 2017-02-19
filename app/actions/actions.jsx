@@ -37,13 +37,6 @@ export var toggleEditBoard = (boardId) => {
   };
 };
 
-// export var toggleAddField = (boardId) => {
-//   return {
-//     type: 'TOGGLE_ADD_FIELD',
-//     boardId
-//   };
-// };
-
 export var addField = (boardId) => {
   return {
     type: 'ADD_FIELD',
